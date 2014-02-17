@@ -1,4 +1,4 @@
-
+package fr.iutvalence.java.tp.puissance4;
 public class LanceurDePuissance4 {
 
 	public static void main(String[] args) {
