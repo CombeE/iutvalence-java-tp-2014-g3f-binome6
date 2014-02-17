@@ -23,6 +23,11 @@ public class Puissance4 {
 	public final static int JETONS_PAR_DEFAUT = 21;
 	
 	/**
+	 * Le nombre de jetons joués dans la partie
+	 */
+	public int nombreJetonsJoues;
+	
+	/**
 	 * La capacité de la grille de puissance 4
 	 */
 	public int capaciteGrille;
@@ -58,5 +63,6 @@ public class Puissance4 {
 		this.jetonsJoueur2 = JETONS_PAR_DEFAUT;
 		this.couleurJetons1 = true;
 		this.couleurJetons2 = false;
+		this.nombreJetonsJoues = 0;
 	}
 }
