@@ -33,7 +33,11 @@ public class Puissance4
 	 */
 	private int capaciteGrille;
 	
-
+	/**
+	 * Une référence vers un tableau de jetons
+	 */
+	
+	private int[][] grille;
 
 	// TODO (fait) corriger le commentaire 
 	// TODO(fait) Ecrire un commentaire plus précis
@@ -44,6 +48,12 @@ public class Puissance4
 	{
 		this.capaciteGrille = CAPACITE_PAR_DEFAUT;
 		this.nombreJetonsJoues = 0;
+		this.grille = new int[6][7];
+		for (int i=0 ; i<this.grille.length; i++){
+			for (int j=0; j<this.grille.length;j++){
+				this.grille[i][j]=0;
+			}
+		}
 	}
 	
 	// TODO(fait) déplacer les méthodes après les constructeurs
@@ -56,5 +66,6 @@ public class Puissance4
 		// TODO(fait) corriger les accents
 		
 		System.out.println("Partie démarrée");
+		
 	}
 }
