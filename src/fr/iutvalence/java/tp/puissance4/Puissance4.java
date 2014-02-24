@@ -79,6 +79,5 @@ public class Puissance4
 		System.out.println("Joueur 2 : Jetons jaune");
 
 		
-		
 	}
 }
