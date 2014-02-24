@@ -56,6 +56,15 @@ public class Puissance4
 		}
 	}
 	
+	/**
+	 * Demande une colonne de la grille sur laquelle on va poser notre jeton
+	 * @param colonne ou l'on pose notre jeton
+	 */
+	public void getColonne(int colonne){
+		
+		
+		
+	}
 	// TODO(fait) déplacer les méthodes après les constructeurs
 	// TODO(fait) corriger le commentaire 
 	/**
@@ -66,6 +75,10 @@ public class Puissance4
 		// TODO(fait) corriger les accents
 		
 		System.out.println("Partie démarrée");
+		System.out.println("Joueur 1 : Jetons rouge");
+		System.out.println("Joueur 2 : Jetons jaune");
+
+		
 		
 	}
 }
