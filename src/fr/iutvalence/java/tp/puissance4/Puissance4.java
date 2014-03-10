@@ -70,6 +70,7 @@ public class Puissance4
 				this.grille[i][j]=0;
 			}
 		}
+		System.out.println("Les lignes vont de 0 à 5 et les colonnes de 0 à 6");
 	}
 
 	/**
