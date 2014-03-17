@@ -16,46 +16,47 @@ public class Puissance4
 	/**
 	 * Le nombre de jetons joués dans la partie
 	 */
-	private int nombreJetonsJoues;
+	public static int nombreJetonsJoues;
 
 	/**
 	 * Indicateur permettant de savoir si une colonne est pleine
 	 */
-	// TODO initialiser l'attribut dans le constructeur
-	private boolean colonnePleine = true;
+	// TODO(fait) initialiser l'attribut dans le constructeur
+	public static boolean colonnePleine;
 
-	// TODO ne pas confondre variable locale et attribut
-	// TODO respecter les conventions d'écriture
+	// TODO (fait) ne pas confondre variable locale et attribut
+	// TODO (fait)respecter les conventions d'écriture
 	/**
 	 * Une colonne que l'utilisateur utilisera pour placer son jeton
 	 */
-	private int Colonne;
+	public static int colonne;
 
 	/**
 	 * Ligne permettant de parcourir la colonne et de savoir ou l'on peut écrire
 	 */
-	// TODO ne pas confondre variable locale et attribut
-	// TODO respecter les conventions d'écriture
-	// TODO initialiser l'attribut dans le constructeur
-	private int Ligne = 5;
+	// TODO (fait)ne pas confondre variable locale et attribut
+	// TODO (fait)respecter les conventions d'écriture
+	// TODO (fait)initialiser l'attribut dans le constructeur
+	public static int ligne;
 
 	// TODO corriger le commentaire
 	/**
 	 * La capacité de la grille de puissance 4
 	 */
-	private int capaciteGrille;
+	private final int capaciteGrille;
 
-	// TODO écrire un commentaire plus précis
+	// TODO(fait) écrire un commentaire plus précis
 	/**
-	 * Une référence vers un tableau de jetons
+	 * Un tableau ou l'on pourra insérer des jetons .
 	 */
-	private int[][] grille;
+	public static int[][] grille;
 
 	/**
 	 * Crée une nouvelle partie en initialisant la grille et les jetons
 	 */
 	public Puissance4()
-	{
+	{	this.ligne=5;
+		this.colonnePleine=true;
 		this.capaciteGrille = CAPACITE_PAR_DEFAUT;
 		this.nombreJetonsJoues = 0;
 		this.grille = new int[6][7];
@@ -69,41 +70,7 @@ public class Puissance4
 		System.out.println("Les lignes vont de 0 à 5 et les colonnes de 0 à 6");
 	}
 
-	/**
-	 * Demande une colonne de la grille sur laquelle on va poser notre jeton et
-	 * stocke le jeton dans la colonne choisie mais que dans la dernière ligne
-	 */
-	// TODO déporter cette méthode dans une classe représentant le joueur
-	public void getColonne()
-	{
-		while (colonnePleine = true)
-		{
-			Scanner choixColonne = new Scanner(System.in);
-			System.out.println("Entrez la colonne dans laquelle vous jouez:");
-			int colonne = choixColonne.nextInt();// L'utilisateur choisi la
-													// colonne dans laquelle il
-													// joue
-			Colonne = colonne;
-			if (this.grille[0][Colonne] != 0)
-			{
-				colonnePleine = true;
-				System.out
-						.println("Colonne pleine, choississez une autre colonne.");
-			}
-			else
-				colonnePleine = false;
-		}
-		while (this.grille[Ligne][Colonne] == 0)
-		{
-			Ligne--;
-		}
-		if (this.nombreJetonsJoues % 2 != 0) // Permet de savoir qui est le
-												// joueur
-			this.grille[Ligne][Colonne] = 1;
-		else
-			this.grille[Ligne][Colonne] = 2;
-
-	}
+	
 
 	/**
 	 * Joue l'intégralité d'une partie. Il reste à régler le fait qu'un joueur
@@ -117,10 +84,10 @@ public class Puissance4
 		while (this.nombreJetonsJoues < this.capaciteGrille)
 		{
 			System.out.println("JOUEUR 1"); // fait jouer le joueur 1
-			getColonne();
+			Joueur.getColonne();
 			this.nombreJetonsJoues++;
 			System.out.println("JOUEUR 2");
-			getColonne();
+			Joueur.getColonne();
 			this.nombreJetonsJoues++;
 		}
 
