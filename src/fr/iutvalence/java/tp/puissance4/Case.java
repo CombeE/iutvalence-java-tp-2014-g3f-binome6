@@ -1,6 +1,5 @@
 package fr.iutvalence.java.tp.puissance4;
 
-// TODO: Auto-generated Javadoc
 /**
  * Contenu possible des cases
  */

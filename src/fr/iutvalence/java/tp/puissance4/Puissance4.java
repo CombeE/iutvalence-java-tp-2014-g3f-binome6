@@ -4,15 +4,17 @@ import java.util.Scanner;
 
 // TODO Ecrire un commentaire plus précis
 /**
- * Les caractéristiques d'une partie de puissance4.
+ * Les caractéristiques d'une partie de puissance4 et les actions possibles.
  */
 public class Puissance4
 {
 	/**
-	 * Le nombre d'emplacements total dans la grille
+	 * Le nombre de ligne jouables dans la grille
 	 */
 	public final static int NOMBRE_DE_LIGNES = 6;
-
+	/**
+	 * Le nombre de colonnes jouables dans la grille
+	 */
 	public final static int NOMBRE_DE_COLONNES = 7;
 
 	/**
@@ -60,10 +62,22 @@ public class Puissance4
 		System.out.println("Joueur 2 : Jetons jaune");
 		for (int nombreDeTours = 0; nombreDeTours < NOMBRE_DE_COLONNES * NOMBRE_DE_LIGNES; nombreDeTours++)
 		{
-			int numeroDeColonneOuJouer = this.joueur1.obtenirColonneOuJouer();
-			/ ...
+			int numeroDeColonneOuJouer = 0;
+			boolean estColonneValide = false;
+			while (!estColonneValide)
+			{
+				numeroDeColonneOuJouer = this.joueur1.obtenirColonneOuJouer();
+				estColonneValide = !estColonnePleine(numeroDeColonneOuJouer);
+			}
+			
 			this.nombreJetonsJoues++;
 		}
 
+		
+	}
+
+	private boolean estColonnePleine(int numeroDeColonne)
+	{
+		return (this.grille[NOMBRE_DE_LIGNES-1][numeroDeColonne] == Case.VIDE);
 	}
 }

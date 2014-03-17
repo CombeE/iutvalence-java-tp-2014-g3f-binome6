@@ -1,5 +1,7 @@
 package fr.iutvalence.java.tp.puissance4;
 
+import java.util.Random;
+
 /**
  * Les caractéristiques ainsi que les actions possibles d'un joueur de puissance 4
  * @author ramilijn
@@ -13,8 +15,7 @@ public class Joueur
 	
 	public int obtenirColonneOuJouer()
 	{
-		int random = (int)(Math.random() * (7));
-		return random; //On obtient un chiffre aléatoire déterminant la colonne jouée
+		return new Random().nextInt(Puissance4.NOMBRE_DE_COLONNES); //On obtient un chiffre aléatoire déterminant la colonne jouée
 		
 	}
 }
