@@ -31,6 +31,10 @@ public class Puissance4
 	private Joueur joueur1;
 	
 	private Joueur joueur2;
+	
+	private Condition desConditions;
+	
+	
 	/**
 	 * 
 	 * @param numeroDeColonne , une colonne passée en paramètre dont on veut connaitre le contenu
@@ -57,14 +61,15 @@ public class Puissance4
 		
 		this.joueur1 = new Joueur();
 		this.joueur2 = new Joueur();
+		this.desConditions = new Condition();
 	}
 
 	/**
-	 * Joue l'intégralité d'une partie. Il reste à régler le fait qu'un joueur
+	 * Joue l'intégralité d'une partie. Les joueurs insèrent des jetons, un par un. Il reste à régler le fait qu'un joueur
 	 * ait gagné
 	 */
 	public void jouer()
-	{
+	{ while (!desConditions.Gagner){
 		System.out.println("Partie démarrée");
 		System.out.println("Joueur 1 : Jetons rouge");
 		System.out.println("Joueur 2 : Jetons jaune");
@@ -95,6 +100,7 @@ public class Puissance4
 			}
 			insererJeton2(numeroDeColonneOuJouer);
 			this.nombreJetonsJoues++;
+		}
 		}
 		}
 		
