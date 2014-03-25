@@ -70,6 +70,8 @@ public class Puissance4
 		System.out.println("Joueur 2 : Jetons jaune");
 		for (int nombreDeTours = 0; nombreDeTours < NOMBRE_DE_COLONNES * NOMBRE_DE_LIGNES; nombreDeTours++)
 		{
+		if(nombreDeTours%2==0)
+		{	System.out.println("Joueur 1");
 			int numeroDeColonneOuJouer = 0;
 			boolean estColonneValide = false;
 			while (!estColonneValide)
@@ -81,10 +83,26 @@ public class Puissance4
 			insererJeton1(numeroDeColonneOuJouer);
 			this.nombreJetonsJoues++;
 		}
-
+		else
+		{ 	System.out.println("Joueur 2");
+			int numeroDeColonneOuJouer = 0;
+			boolean estColonneValide = false;
+			while (!estColonneValide)
+			{
+				numeroDeColonneOuJouer = this.joueur2.obtenirColonneOuJouer();
+				estColonneValide = !estColonnePleine(numeroDeColonneOuJouer);
+				
+			}
+			insererJeton2(numeroDeColonneOuJouer);
+			this.nombreJetonsJoues++;
+		}
+		}
 		
 	}
-
+/**
+ * Insère un jeton dans une colonne passée en paramètre
+ * @param colonne
+ */
 	public void insererJeton1(int colonne)
 	{
 		int ligne = NOMBRE_DE_LIGNES ;
@@ -101,8 +119,7 @@ public class Puissance4
 		while (this.grille[ligne][colonne] == Case.VIDE){
 			ligne--;
 		}
-		this.grille[ligne+1][colonne] = Case.ROUGE;
-
+		this.grille[ligne+1][colonne] = Case.JAUNE;
 	}
 
 }
