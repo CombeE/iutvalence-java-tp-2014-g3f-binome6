@@ -31,7 +31,15 @@ public class Puissance4
 	private Joueur joueur1;
 	
 	private Joueur joueur2;
-	
+	/**
+	 * 
+	 * @param numeroDeColonne , une colonne passée en paramètre dont on veut connaitre le contenu
+	 * @return le contenu de la case situé à la ligne 0 et à la colonne donnée, qui permet de savoir si la colonne est pleine
+	 */
+	private boolean estColonnePleine(int numeroDeColonne)
+	{
+		return (this.grille[0][numeroDeColonne] == Case.VIDE);
+	}
 
 	/**
 	 * Crée une nouvelle partie en initialisant la grille et les jetons
@@ -68,16 +76,33 @@ public class Puissance4
 			{
 				numeroDeColonneOuJouer = this.joueur1.obtenirColonneOuJouer();
 				estColonneValide = !estColonnePleine(numeroDeColonneOuJouer);
+				
 			}
-			
+			insererJeton1(numeroDeColonneOuJouer);
 			this.nombreJetonsJoues++;
 		}
 
 		
 	}
 
-	private boolean estColonnePleine(int numeroDeColonne)
+	public void insererJeton1(int colonne)
 	{
-		return (this.grille[NOMBRE_DE_LIGNES-1][numeroDeColonne] == Case.VIDE);
+		int ligne = NOMBRE_DE_LIGNES ;
+		while (this.grille[ligne][colonne] == Case.VIDE){
+			ligne--;
+		}
+		this.grille[ligne+1][colonne] = Case.ROUGE;
+
 	}
+	
+	public void insererJeton2(int colonne)
+	{
+		int ligne = NOMBRE_DE_LIGNES ;
+		while (this.grille[ligne][colonne] == Case.VIDE){
+			ligne--;
+		}
+		this.grille[ligne+1][colonne] = Case.ROUGE;
+
+	}
+
 }
