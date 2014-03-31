@@ -26,7 +26,7 @@ public class Puissance4
 	/**
 	 * Un tableau ou l'on pourra insérer des jetons .
 	 */
-	private Case[][] grille;
+	private CouleurJeton[][] grille;
 	
 	private Joueur joueur1;
 	
@@ -42,7 +42,7 @@ public class Puissance4
 	 */
 	private boolean estColonnePleine(int numeroDeColonne)
 	{
-		return (this.grille[0][numeroDeColonne] == Case.VIDE);
+		return (this.grille[0][numeroDeColonne] == null);
 	}
 
 	/**
@@ -51,11 +51,11 @@ public class Puissance4
 	public Puissance4()
 	{
 		this.nombreJetonsJoues = 0;
-		this.grille = new Case[NOMBRE_DE_LIGNES][NOMBRE_DE_COLONNES];
+		this.grille = new Boolean[NOMBRE_DE_LIGNES][NOMBRE_DE_COLONNES];
 
 		for (int numeroDeLigne = 0; numeroDeLigne < NOMBRE_DE_LIGNES; numeroDeLigne++)
 			for (int numeroDeColonne = 0; numeroDeColonne < NOMBRE_DE_COLONNES; numeroDeColonne++)
-				this.grille[numeroDeLigne][numeroDeColonne] = Case.VIDE;
+				this.grille[numeroDeLigne][numeroDeColonne] = Case.estVide;
 
 		System.out.println("Les lignes vont de 0 à 5 et les colonnes de 0 à 6");
 		
@@ -69,7 +69,7 @@ public class Puissance4
 	 * ait gagné
 	 */
 	public void jouer()
-	{ while (!desConditions.Gagner){
+	{ while (!desConditions.Gagner()){
 		System.out.println("Partie démarrée");
 		System.out.println("Joueur 1 : Jetons rouge");
 		System.out.println("Joueur 2 : Jetons jaune");
@@ -85,7 +85,7 @@ public class Puissance4
 				estColonneValide = !estColonnePleine(numeroDeColonneOuJouer);
 				
 			}
-			insererJeton1(numeroDeColonneOuJouer);
+			deposerJeton(numeroDeColonneOuJouer, CouleurJeton.ROUGE);
 			this.nombreJetonsJoues++;
 		}
 		else
@@ -98,7 +98,7 @@ public class Puissance4
 				estColonneValide = !estColonnePleine(numeroDeColonneOuJouer);
 				
 			}
-			insererJeton2(numeroDeColonneOuJouer);
+			deposerJeton(numeroDeColonneOuJouer, CouleurJeton.JAUNE);
 			this.nombreJetonsJoues++;
 		}
 		}
@@ -107,25 +107,18 @@ public class Puissance4
 	}
 /**
  * Insère un jeton dans une colonne passée en paramètre
- * @param colonne
+ * @param colonne la colonne ou l'on va déposer le jeton
+ * @param couleurJeton la couleur du jeton que l'on va déposer
  */
-	public void insererJeton1(int colonne)
+	public void deposerJeton(int colonne, CouleurJeton couleurJeton )
 	{
 		int ligne = NOMBRE_DE_LIGNES ;
-		while (this.grille[ligne][colonne] == Case.VIDE){
+		int ligne_stockée = 0;
+		while (this.grille[ligne][colonne] == null){
 			ligne--;
 		}
-		this.grille[ligne+1][colonne] = Case.ROUGE;
+		this.grille[ligne+1][colonne] = couleurJeton;
 
 	}
-	
-	public void insererJeton2(int colonne)
-	{
-		int ligne = NOMBRE_DE_LIGNES ;
-		while (this.grille[ligne][colonne] == Case.VIDE){
-			ligne--;
-		}
-		this.grille[ligne+1][colonne] = Case.JAUNE;
-	}
-
 }
+	

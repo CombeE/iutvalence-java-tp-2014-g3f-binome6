@@ -18,7 +18,8 @@ public class Condition {
 	 * 
 	 * @return Si il y'a puissance4 à la verticale
 	 */
-	public boolean alignementVertical(){
+	public boolean alignementVertical(int unecolonne){
+		return false;
 		
 	}
 }

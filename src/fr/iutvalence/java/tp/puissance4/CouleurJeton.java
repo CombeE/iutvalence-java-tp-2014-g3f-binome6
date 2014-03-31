@@ -3,17 +3,16 @@ package fr.iutvalence.java.tp.puissance4;
 /**
  * Contenu possible des cases
  */
-public enum Case
+public enum CouleurJeton
 {
-	
-	/** Case vide. */
-	VIDE,
-	
-	/** Un jeton rouge est dans la case. */
+	/** La couleur rouge */
 	ROUGE,
 	
-	/** Un jeton jaune est dans la case. */
+	/** La couleur Jaune. */
 	JAUNE;
 
-
+	public static CouleurJeton obtenirCouleurDuJoueurParNumero(int numeroDuJoueur)
+	{
+		;
+	}
 }
