@@ -18,7 +18,7 @@ public class Puissance4
 	/**
 	 * Le nombre de jetons joués dans la partie
 	 */
-	private int nombreJetonsJoues;
+	public int nombreJetonsJoues;
 
 	// TODO(fait) écrire un commentaire plus précis
 	/**
@@ -34,10 +34,6 @@ public class Puissance4
 	 */
 	private Joueur joueur2;
 
-	/**
-	 * Les conditions nécessaires pour gagner une partie de puissance4
-	 */
-	private Condition desConditions;
 
 	/**
 	 * 
@@ -69,21 +65,20 @@ public class Puissance4
 
 		this.joueur1 = new Joueur();
 		this.joueur2 = new Joueur();
-		this.desConditions = new Condition();
 	}
 
 	/**
 	 * Joue l'intégralité d'une partie. Les joueurs insèrent des jetons, un par
 	 * un. Il reste à régler le fait qu'un joueur ait gagné
 	 */
-	//TODO factoriser les tours de jeu (joueur 1 et joueur 2)
 	public void jouer()
 	{
-		while (!desConditions.Gagner())
-		{
+		
 			System.out.println("Partie démarrée");
 			System.out.println("Joueur 1 : Jetons rouge");
 			System.out.println("Joueur 2 : Jetons jaune");
+			int derniereColonneJouee=45;
+			while (!this.Gagner(derniereColonneJouee)){
 			for (int nombreDeTours = 0; nombreDeTours < NOMBRE_DE_COLONNES * NOMBRE_DE_LIGNES; nombreDeTours++)
 			{
 				if (nombreDeTours % 2 == 0)
@@ -95,7 +90,7 @@ public class Puissance4
 					{
 						numeroDeColonneOuJouer = this.joueur1.obtenirColonneOuJouer();
 						estColonneValide = !estColonnePleine(numeroDeColonneOuJouer);
-
+						derniereColonneJouee = numeroDeColonneOuJouer;
 					}
 					deposerJeton(numeroDeColonneOuJouer, CouleurJeton.ROUGE);
 					this.nombreJetonsJoues++;
@@ -109,6 +104,7 @@ public class Puissance4
 					{
 						numeroDeColonneOuJouer = this.joueur2.obtenirColonneOuJouer();
 						estColonneValide = !estColonnePleine(numeroDeColonneOuJouer);
+						derniereColonneJouee = numeroDeColonneOuJouer;
 
 					}
 					deposerJeton(numeroDeColonneOuJouer, CouleurJeton.JAUNE);
@@ -119,6 +115,11 @@ public class Puissance4
 
 	}
 
+
+	
+
+	
+	
 	/**
 	 * Insère un jeton dans une colonne passée en paramètre
 	 * 
@@ -133,6 +134,36 @@ public class Puissance4
 			if (this.grille[numeroDeLigne][numeroDeColonne].deposerJeton(couleurJeton))
 				return true;
 
+		return false;
+	}
+	
+
+	/**
+	 * Permet de vérifier si une partie a été gagnée ou non
+	 */
+	public boolean Gagner(int colonneJouee)
+	{
+		if (this.alignementVertical(colonneJouee)||this.alignementHorizontal(colonneJouee)||this.alignementDiagonal(colonneJouee))
+			return true;
+		else return false;
+	}
+	
+	/**
+	 * 
+	 * @return Si il y'a puissance4 à la verticale
+	 */
+	public boolean alignementVertical(int uneColonne){
+		int compteurdejeton=1;
+		while()
+		return false;
+		
+	}
+	
+	public boolean alignementHorizontal(int uneColonne){
+		return false;
+	}
+	
+	public boolean alignementDiagonal(int uneColonne){
 		return false;
 	}
 }
