@@ -179,7 +179,7 @@ public class Puissance4
 		int compteurdejeton=1;
 		int ligne;
 		ligne=uneLigne;
-		while(this.grille[ligne][uneColonne].obtenirCouleurJeton() == uneCouleur)
+		while(this.grille[ligne][uneColonne].obtenirCouleurJeton() == uneCouleur && ligne<6 && ligne >=0)
 			ligne++;
 			compteurdejeton++;
 		if (compteurdejeton == 4)
@@ -199,9 +199,9 @@ public class Puissance4
 		int compteurdejeton=1;
 		int colonne;
 		colonne=uneColonne;
-		while(this.grille[uneLigne][colonne].obtenirCouleurJeton() == uneCouleur)
+		while(this.grille[uneLigne][colonne].obtenirCouleurJeton() == uneCouleur&&colonne<7)
 			colonne++;
-		while(this.grille[uneLigne][colonne].obtenirCouleurJeton() == uneCouleur)
+		while(this.grille[uneLigne][colonne].obtenirCouleurJeton() == uneCouleur&&colonne>=0)
 			colonne--;
 			compteurdejeton++;
 			if(compteurdejeton == 4)
@@ -221,10 +221,10 @@ public class Puissance4
 		int ligne;
 		ligne=uneLigne;
 		colonne=uneColonne;
-		while(this.grille[ligne][colonne].obtenirCouleurJeton() == uneCouleur)
+		while(this.grille[ligne][colonne].obtenirCouleurJeton() == uneCouleur&&colonne<7 && ligne>=0)
 			colonne++;
 			ligne--;
-		while(this.grille[ligne][colonne].obtenirCouleurJeton() == uneCouleur)
+		while(this.grille[ligne][colonne].obtenirCouleurJeton() == uneCouleur&&colonne>=0 && ligne<6)
 			colonne--;
 			ligne++;
 			compteurdejeton++;
@@ -247,10 +247,10 @@ public class Puissance4
 		int ligne;
 		ligne=uneLigne;
 		colonne=uneColonne;
-		while(this.grille[ligne][colonne].obtenirCouleurJeton() == uneCouleur)
+		while(this.grille[ligne][colonne].obtenirCouleurJeton() == uneCouleur&&colonne<7 && ligne <6)
 			colonne++;
 			ligne++;
-		while(this.grille[ligne][colonne].obtenirCouleurJeton() == uneCouleur)
+		while(this.grille[ligne][colonne].obtenirCouleurJeton() == uneCouleur && colonne>=0 && ligne>=0)
 			colonne--;
 			ligne--;
 			compteurdejeton++;
@@ -265,8 +265,8 @@ public class Puissance4
 		for (int numeroDeLigne = 0; numeroDeLigne < NOMBRE_DE_LIGNES; numeroDeLigne++){
 			for (int numeroDeColonne = 0; numeroDeColonne < NOMBRE_DE_COLONNES; numeroDeColonne++){
 				puissance4AsciiArt += this.grille[numeroDeLigne][numeroDeColonne].toString();
-			
 			}
+			puissance4AsciiArt += "\n";
 		}
 		return puissance4AsciiArt;
 	}

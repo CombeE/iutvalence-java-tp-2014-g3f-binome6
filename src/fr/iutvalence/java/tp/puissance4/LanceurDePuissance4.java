@@ -17,6 +17,8 @@ public class LanceurDePuissance4
 
 		Puissance4 PartieDePuissance4 = new Puissance4();
 
+		System.out.println(new Puissance4());
+		
 		System.out.println("Demarrage de la partie");
 
 		PartieDePuissance4.jouer();
