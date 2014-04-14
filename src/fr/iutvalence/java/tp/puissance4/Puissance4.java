@@ -20,6 +20,13 @@ public class Puissance4
 	 */
 	public int nombreJetonsJoues;
 
+	/**
+	 * la dernière ligne ou un jeton a été posé, on l'utilise pour vérifier les conditions
+	 * de gain du jeu, on l'initialise à 50 car la ligne 50 n'existe pas.
+	 */
+	public int derniereLigneJouee = 50;
+	
+	
 	// TODO(fait) écrire un commentaire plus précis
 	/**
 	 * Un tableau ou l'on pourra insérer des jetons .
@@ -63,8 +70,8 @@ public class Puissance4
 
 		System.out.println("Les lignes vont de 0 à 5 et les colonnes de 0 à 6");
 
-		this.joueur1 = new Joueur();
-		this.joueur2 = new Joueur();
+		this.joueur1 = new Joueur(CouleurJeton.ROUGE);
+		this.joueur2 = new Joueur(CouleurJeton.JAUNE);
 	}
 
 	/**
@@ -78,7 +85,7 @@ public class Puissance4
 			System.out.println("Joueur 1 : Jetons rouge");
 			System.out.println("Joueur 2 : Jetons jaune");
 			int derniereColonneJouee=45;
-			while (!this.Gagner(derniereColonneJouee)){
+			while (!this.Gagner(derniereColonneJouee, this.derniereLigneJouee,this.joueur1.CouleurJoueur )||!this.Gagner(derniereColonneJouee, this.derniereLigneJouee,this.joueur2.CouleurJoueur )){
 			for (int nombreDeTours = 0; nombreDeTours < NOMBRE_DE_COLONNES * NOMBRE_DE_LIGNES; nombreDeTours++)
 			{
 				if (nombreDeTours % 2 == 0)
@@ -111,9 +118,10 @@ public class Puissance4
 					deposerJeton(numeroDeColonneOuJouer, CouleurJeton.JAUNE);
 					this.nombreJetonsJoues++;
 				}
+				
 			}
 		}
-
+			System.out.println("Partie gagnée");
 	}
 
 
@@ -128,35 +136,47 @@ public class Puissance4
 	 *            la colonne ou l'on va déposer le jeton
 	 * @param couleurJeton
 	 *            la couleur du jeton que l'on va déposer
+	 *            
+	 * @return boolean
+	 * 			est vrai si un jeton a pu être déposé dans une case
 	 */
 	public boolean deposerJeton(int numeroDeColonne, CouleurJeton couleurJeton)
 	{
 		for (int numeroDeLigne = 0; numeroDeLigne < NOMBRE_DE_LIGNES; numeroDeLigne++)
 			if (this.grille[numeroDeLigne][numeroDeColonne].deposerJeton(couleurJeton))
+				this.derniereLigneJouee=numeroDeLigne;
 				return true;
-
-		return false;
 	}
 	
 
 	/**
 	 * Permet de vérifier si une partie a été gagnée ou non
+	 * @param colonneJouee 
+	 * @param uneLigne 
+	 * @param uneCouleur 
+	 * @return est vrai lorsqu'un joueur a gagné une partie de puissance 4
 	 */
-	public boolean Gagner(int colonneJouee, int uneLigne)
+	public boolean Gagner(int colonneJouee, int uneLigne, CouleurJeton uneCouleur)
 	{
-		if (this.alignementVertical(colonneJouee, uneLigne)||this.alignementHorizontal(colonneJouee, uneLigne)||this.alignementDiagonal(colonneJouee, uneLigne))
+		if (this.alignementVertical(colonneJouee, uneLigne, uneCouleur)||this.alignementHorizontal(colonneJouee, uneLigne, uneCouleur)||this.alignementDiagonalMontée(colonneJouee, uneLigne, uneCouleur)||this.alignementDiagonalDescente(colonneJouee, uneLigne, uneCouleur))
 			return true;
 		else return false;
 	}
 	
+
+
 	/**
 	 * 
-	 * @return Si il y'a puissance4 à la verticale
+	 * @param uneColonne  
+	 * @param uneLigne
+	 * @return est vrai si il y a puissance4 à la verticale
 	 */
-	public boolean alignementVertical(int uneColonne, int uneLigne){
+	public boolean alignementVertical(int uneColonne, int uneLigne, CouleurJeton uneCouleur){
 		int compteurdejeton=1;
-		while(this.grille[uneLigne][uneColonne].obtenirCouleurJeton() == CouleurJeton.ROUGE)
-			uneLigne++;
+		int ligne;
+		ligne=uneLigne;
+		while(this.grille[ligne][uneColonne].obtenirCouleurJeton() == uneCouleur)
+			ligne++;
 			compteurdejeton++;
 		if (compteurdejeton == 4)
 			return true;
@@ -164,11 +184,76 @@ public class Puissance4
 		
 	}
 	
-	public boolean alignementHorizontal(int uneColonne, int uneLigne){
-		return false;
+	/**
+	 * 
+	 * @param uneColonne
+	 * @param uneLigne
+	 * @param uneCouleur
+	 * @return est vrai si il y a puissance 4 horizontal
+	 */
+	public boolean alignementHorizontal(int uneColonne, int uneLigne, CouleurJeton uneCouleur){
+		int compteurdejeton=1;
+		int colonne;
+		colonne=uneColonne;
+		while(this.grille[uneLigne][colonne].obtenirCouleurJeton() == uneCouleur)
+			colonne++;
+		while(this.grille[uneLigne][colonne].obtenirCouleurJeton() == uneCouleur)
+			colonne--;
+			compteurdejeton++;
+			if(compteurdejeton == 4)
+				return true;
+			else return false;
+	}
+	/**
+	 * 
+	 * @param uneColonne
+	 * @param uneLigne
+	 * @param uneCouleur
+	 * @return est vrai s'il y a puissance 4 en diagonale vers le nord-est
+	 */
+	public boolean alignementDiagonalMontée(int uneColonne, int uneLigne, CouleurJeton uneCouleur){
+		int compteurdejeton=1;
+		int colonne;
+		int ligne;
+		ligne=uneLigne;
+		colonne=uneColonne;
+		while(this.grille[ligne][colonne].obtenirCouleurJeton() == uneCouleur)
+			colonne++;
+			ligne--;
+		while(this.grille[ligne][colonne].obtenirCouleurJeton() == uneCouleur)
+			colonne--;
+			ligne++;
+			compteurdejeton++;
+			if(compteurdejeton == 4)
+				return true;
+			else return false;
 	}
 	
-	public boolean alignementDiagonal(int uneColonne, int uneLigne){
-		return false;
+	/**
+	 * 
+	 * @param uneColonne
+	 * @param uneLigne
+	 * @param uneCouleur
+	 * @return est vrai s'il y a puissance 4 en diagonale vers le sud-ouest
+	 */
+	private boolean alignementDiagonalDescente(int uneColonne, int uneLigne, CouleurJeton uneCouleur)
+	{
+		int compteurdejeton=1;
+		int colonne;
+		int ligne;
+		ligne=uneLigne;
+		colonne=uneColonne;
+		while(this.grille[ligne][colonne].obtenirCouleurJeton() == uneCouleur)
+			colonne++;
+			ligne++;
+		while(this.grille[ligne][colonne].obtenirCouleurJeton() == uneCouleur)
+			colonne--;
+			ligne--;
+			compteurdejeton++;
+			if(compteurdejeton == 4)
+				return true;
+			else return false;
 	}
+	
+	
 }
