@@ -122,6 +122,10 @@ public class Puissance4
 			}
 		}
 			System.out.println("Partie gagnée");
+			if (this.Gagner(derniereColonneJouee, derniereLigneJouee, CouleurJeton.ROUGE))
+				System.out.println("Joueur 1 Gagne la partie");
+			if (this.Gagner(derniereColonneJouee, derniereLigneJouee, CouleurJeton.JAUNE))
+				System.out.println("Joueur 2 Gagne la partie");
 	}
 
 
@@ -255,5 +259,15 @@ public class Puissance4
 			else return false;
 	}
 	
-	
+	public String toString()
+	{
+		String puissance4AsciiArt = "";
+		for (int numeroDeLigne = 0; numeroDeLigne < NOMBRE_DE_LIGNES; numeroDeLigne++){
+			for (int numeroDeColonne = 0; numeroDeColonne < NOMBRE_DE_COLONNES; numeroDeColonne++){
+				puissance4AsciiArt += this.grille[numeroDeLigne][numeroDeColonne].toString();
+			
+			}
+		}
+		return puissance4AsciiArt;
+	}
 }
